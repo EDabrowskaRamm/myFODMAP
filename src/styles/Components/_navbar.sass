@@ -1,0 +1,52 @@
+.navbar
+  background-color: $color-main
+  color: $color-white
+  height: 50px
+  position: relative
+
+  &__toggle
+    float: right
+    clear: both
+    display: block
+
+  .collapse
+    display: none
+
+  &__collapse
+    position: absolute
+    top: 2px
+    left: 0
+    width: 100%
+    height: 90vh
+  
+  &__list
+    list-style-type: none
+    margin: 0
+    padding: 0
+    display: flex
+    flex-direction: column
+    align-items: center
+    // transform: translateY(50vh)
+
+  &__list-item:not(:last-of-type)
+    margin-bottom: 50px  
+
+@media (min-width: $mobileWidth)
+    .navbar
+      height: auto
+
+      &__toggle
+        display: none
+
+      &__list
+        padding: 20px 0
+        display: flex
+        flex-direction: row
+        justify-content: flex-end
+        transform: none
+
+      &__list-item
+        margin-left: 20px
+
+        &:not(:last-of-type)
+          margin-bottom: 0
