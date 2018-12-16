@@ -3,6 +3,7 @@ import { dairyReplacementProducts } from './dairy-replacement-products'
 import { fruits } from './fruits'
 import { drinks } from './drinks'
 import { corns } from './corns'
+import { vegetables } from './vegetables'
 
 export const permittedProducts = [
   {
@@ -27,7 +28,7 @@ export const permittedProducts = [
   },
   {
     name: 'Warzywa',
-    products: dairyProducts
+    products: vegetables
   },
   {
     name: 'Orzechy i nasiona',
