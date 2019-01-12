@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 // import SearchInput from '../Components/SearchInput'
-import { allProducts } from '../data/index'
+import { productsData } from '../data/index'
 
 export default class SearchView extends Component {
   state = {
@@ -10,12 +10,35 @@ export default class SearchView extends Component {
 
   render() {
     const { searchValue } = this.state
-    const productGroupArray = allProducts.map(productGroup => productGroup)
-    const productsArray = productGroupArray.map(foodGroup => foodGroup.products)
-          // .map(product => product.name)
+    let allProducts = []
 
-    // const filterProducts = products.filter(productName => productName == searchValue)
-console.log(productGroupArray, productsArray)
+    productsData.forEach(list => {
+      list.forEach(productGroup => {
+        const product = productGroup.products.map(product => product)
+        allProducts = [...allProducts, ...product]
+      })
+    })
+
+    const filterProducts = allProducts.filter(product => {
+      return product.name.toLowerCase() === searchValue.toLowerCase()
+    })
+
+    const getStatus = (status) => {
+      switch (status) {
+        case 'green':
+          return 'enjoy'
+
+        case 'yellow':
+          return 'larger portions (given in brackets) may cause problems'
+
+        case 'red':
+          return 'permitted only in the minimum quantity (given in brackets)'
+      
+        default:
+          break
+      }
+    }
+
     return (
       <div className='search-view'>
         <div className='search-view__input-wrapper'>
@@ -26,7 +49,15 @@ console.log(productGroupArray, productsArray)
             onChange={e => this.setState({ searchValue: e.currentTarget.value })} />
         </div>
         <div className='search-view__results'>
-          {searchValue && <p>{searchValue}</p>}
+          {searchValue
+            && (filterProducts.length > 0
+              ? filterProducts
+                .map((product, i) => <div key={i}>
+                  <p>{product.name}</p>
+                  <p>{product.status ? getStatus(product.status) : 'prohibited'}</p>
+                </div>)
+              : 'Try naming it differently or there is no such product yet')
+          }
         </div>
       </div>
     )

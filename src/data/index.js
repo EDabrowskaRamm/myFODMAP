@@ -1,4 +1,4 @@
 import { permittedProducts } from './permitted/index'
-// import { prohibitedProducts } from './prohibited/index'
+import { prohibitedProducts } from './prohibited/index'
 
-export const allProducts = [permittedProducts]
+export const productsData = [permittedProducts, prohibitedProducts]
